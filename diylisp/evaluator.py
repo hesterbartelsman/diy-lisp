@@ -15,33 +15,6 @@ making your work a bit easier. (We're supposed to get through this thing
 in a day, after all.)
 """
 
-def evaluate(ast, env):
-    """Evaluate an Abstract Syntax Tree in the specified environment."""
-    left_value = ast.left.evaluate(env)
-    right_value = self.right.evaluate(env)
-    if is_boolean()
-    if ast[0] == 'quote':
-        return ast[1]
-    if ast[0] == 'atom':
-        return is_atom(ast[1])
-    if ast[0] == 'eq':
-        value = left_value == right_value
-    if is_integer(left_value) and is_integer(right_value):
-        if ast.op == '+':
-            value = left_value + right_value
-        elif ast.op == '-':
-            value = left_value - right_value
-        elif ast.op == '*':
-            value = left_value * right_value
-        elif ast.op == '/':
-            value = left_value / right_value
-        elif ast.op == '%'
-            value = left_value % right_value
-        elif ast.op == '>'
-            value = left_value > right_value
-    else:
-        raise NotImplementedError("DIY")
-    return value
 
 
 def evaluate(ast, env):
@@ -57,17 +30,33 @@ def evaluate(ast, env):
         value = ast[1] == ast[2]
     if is_integer(ast[1]) and is_integer(ast[2]):
         if ast.op == '+':
-            value = ast[1] + ast[2]
+            value = evaluate(ast[1], env) + evaluate(ast[2], env)
         elif ast.op == '-':
-            value = ast[1] - ast[2]
+            value = evaluate(ast[1], env) - evaluate(ast[2], env)
         elif ast.op == '*':
-            value = ast[1] * ast[2]
+            value = evaluate(ast[1], env) * evaluate(ast[2], env)
         elif ast.op == '/':
-            value = ast[1] / ast[2]
+            value = evaluate(ast[1], env) / evaluate(ast[2], env)
         elif ast.op == '%'
-            value = ast[1] % ast[2]
+            value = evaluate(ast[1], env) % evaluate(ast[2], env)
         elif ast.op == '>'
-            value = ast[1] > ast[2]
+            value = evaluate(ast[1], env) > evaluate(ast[2], env)
+    if ast[0] == 'if':
+        if not is_boolean(ast[1]):
+            return 'Error: expected the statement to evaluate to a boolean'
+        if is_boolean(ast[1]):
+            if ast[2] == True:
+                value = evaluate(ast[2], env)
+            else:
+                value = evaluate(ast[3], env)
     else:
         raise NotImplementedError("DIY")
     return value
+    
+
+    #for the conditional evaluation:
+    #somehow that when the if statement does not evaluate to a boolean:
+    #give error: expected a boolean for conditional statment
+    #when if statement does evaluate to a boolean:
+    #give: if conditional evaluates to true: evaluate second part of if statement
+    #give: if conditional evaluate to false: evaluate third part of if statement
