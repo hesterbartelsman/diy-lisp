@@ -15,6 +15,8 @@ making your work a bit easier. (We're supposed to get through this thing
 in a day, after all.)
 """
 
+#definitely handier to split functions and have the evaluator call the seperate funcitons
+#I'll leave what I did for last assignment as it was though.
 
 
 def evaluate(ast, env):
@@ -49,10 +51,38 @@ def evaluate(ast, env):
                 value = evaluate(ast[2], env)
             else:
                 value = evaluate(ast[3], env)
+    if ast[0] == 'def' :
+        value = evalDef(ast[1:], env)
+    if ast[0] == 'lambda' :
+        value =
     else:
         raise NotImplementedError("DIY")
+
     return value
+
+def
+def
+
+def evalDef(ast, env):
+    assert_valid_definition(ast)
+    symbol = ast[0]
+    value = evaluate(ast[1],env)
+    env.set(symbol,value)
+    return symbol
+
+def evalLam(ast, env)
+#not sure how to do this...
+
+
+
+
     
+
+
+
+
+
+
 
     #for the conditional evaluation:
     #somehow that when the if statement does not evaluate to a boolean:
