@@ -14,10 +14,18 @@ class LispError(Exception):
 class Closure:
     
     def __init__(self, env, params, body):
-        raise NotImplementedError("DIY")
+        self.env = env
+        self.params = params
+        self.body = body
+
+
 
     def __str__(self):
         return "<closure/%d>" % len(self.params)
+
+#I'm a little confused about local/global variables here...
+#Still missing extend definition
+
 
 class Environment:
 
@@ -25,10 +33,13 @@ class Environment:
         self.variables = variables if variables else {}
 
     def lookup(self, symbol):
-        raise NotImplementedError("DIY")
+        if symbol in self.variables:
+            self.variable[symbol]
 
     def extend(self, variables):
-        raise NotImplementedError("DIY")
+
 
     def set(self, symbol, value):
-        raise NotImplementedError("DIY")
+        if symbol in self.variables:
+            raise LispError("This is already a variable!")
+        self.variables[symbol] = value
