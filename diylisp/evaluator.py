@@ -15,9 +15,9 @@ making your work a bit easier. (We're supposed to get through this thing
 in a day, after all.)
 """
 
-#definitely handier to split functions and have the evaluator call the seperate funcitons
+#definitely handier to split functions and have the evaluator call the separate funcitons
 #I'll leave what I did for last assignment as it was though.
-
+#I didn't do the tests all in order. I chose the ones I understand.
 
 def evaluate(ast, env):
     """Evaluate an Abstract Syntax Tree in the specified environment."""
@@ -54,7 +54,7 @@ def evaluate(ast, env):
     if ast[0] == 'def' :
         value = evalDef(ast[1:], env)
     if ast[0] == 'lambda' :
-        value =
+        value = evalLam(ast[1:], env)
     else:
         raise NotImplementedError("DIY")
 
@@ -71,7 +71,13 @@ def evalDef(ast, env):
     return symbol
 
 def evalLam(ast, env)
-#not sure how to do this...
+    params = ast[0]
+    body = ast[1]
+    if is_list(params):
+        #rest of function
+        #should return some value.. 
+    else:
+        raise LispError("parameters not a list")
 
 
 
