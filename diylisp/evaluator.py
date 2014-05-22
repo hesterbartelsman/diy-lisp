@@ -91,8 +91,9 @@ def evalLam(ast, env)
         raise LispError("parameters not a list")
 
 def evalCons(ast, env):
-
-
+    head = evaluate(ast[0])
+    tail = evaluate(ast[1])
+    return tail.insert(0,head)
 
 def evalHead(ast, env):
     headTail = evaluate(ast[0])
