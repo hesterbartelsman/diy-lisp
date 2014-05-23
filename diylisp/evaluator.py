@@ -22,16 +22,14 @@ in a day, after all.)
 def evaluate(ast, env):
     """Evaluate an Abstract Syntax Tree in the specified environment."""
 
-    if is_boolean(ast) or is_integer(ast):
-        return = ast
-    else:
-        raise Error("Wrong input: input must be boolean or integer")
+#    if is_boolean(ast) or is_integer(ast):
+
     if ast[0] == 'quote':
         value = ast[1]
     elif ast[0] == 'atom':
         value = is_atom(ast[1])
     elif ast[0] == 'eq':
-        value = is_atom(evaluate(ast[1])) == is_atom(evaluate(ast[2]))
+        value = is_atom(evaluate(ast[1], env)) == is_atom(evaluate(ast[2], env))
     elif is_integer(ast[1]) and is_integer(ast[2]):
         if ast.op == '+':
             value = evaluate(ast[1], env) + evaluate(ast[2], env)
@@ -53,7 +51,7 @@ def evaluate(ast, env):
                 value = evaluate(ast[2], env)
             else:
                 value = evaluate(ast[3], env)
-    elif ast[0] == 'def' :
+    elif ast[0] == 'define' :
         value = evalDef(ast[1:], env)
     elif ast[0] == 'lambda' :
         value = evalLam(ast[1:], env)
@@ -68,11 +66,12 @@ def evaluate(ast, env):
 
     else:
         raise NotImplementedError("DIY")
-
     return value
 
-def
-def
+
+
+
+
 
 def evalDef(ast, env):
     assert_valid_definition(ast)
@@ -81,30 +80,30 @@ def evalDef(ast, env):
     env.set(symbol,value)
     return symbol
 
-def evalLam(ast, env)
-    params = ast[0]
-    body = ast[1]
-    if is_list(params):
-        #rest of function
-        #should return some value..
-    else:
-        raise LispError("parameters not a list")
+#def evalLam(ast, env):
+#    params = ast[0]
+#    body = ast[1]
+#    if is_list(params):
+#        #rest of function
+#        #should return some value..
+#    else:
+#        raise LispError("parameters not a list")
 
 def evalCons(ast, env):
-    head = evaluate(ast[0])
-    tail = evaluate(ast[1])
+    head = evaluate(ast[0], env)
+    tail = evaluate(ast[1], env)
     return tail.insert(0,head)
 
 def evalHead(ast, env):
-    headTail = evaluate(ast[0])
+    headTail = evaluate(ast[0], env)
     return headTail[0]
 
 def evalTail(ast, env):
-    headTail = evaluate(ast[0])
+    headTail = evaluate(ast[0], env)
     return headTail[1:]
 
-def evalEmpty(ast, eng):
-    emptyList = evaluate(ast[0])
+def evalEmpty(ast, env):
+    emptyList = evaluate(ast[0], env)
     return emptyList == []
 
     
