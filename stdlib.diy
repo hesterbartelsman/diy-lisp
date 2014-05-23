@@ -1,8 +1,24 @@
 ;; Some logical operators.
 
+;; but these are odd. what about when in the 'not definition' b isn't false, but;; true?
+
 (define not
     (lambda (b)
         (if b #f #t)))
+
+(define and
+	(lambda (a b)
+		(if a #t (if b #t) #t)))
+
+(define xor
+	(lambda (a b)
+		(if a #t (if b #f) #t)))
+
+(define or
+	(lambda (a b)
+		(if a #t (
+    	 
+
 
 ;; DIY -- Implement the rest of your standard library
 ;; here as part 7 of the workshop.
